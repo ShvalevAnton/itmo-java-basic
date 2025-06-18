@@ -12,3 +12,4 @@ public class Study {
         return this.course;
     }
 }
+
