@@ -11,7 +11,8 @@ public class Main {
         System.out.println(calc.sum(5000000000L, 3L)); // 5000000003 (long)
         System.out.println(calc.sum(2.5, 3.1));      // 5.6 (double)
 
-        System.out.println(calc.divide(10, 3));      // 3 (int)
+        System.out.println(calc.divide(10, 3));      // 3.333 (double)
+        System.out.println(calc.divide(10.0, 3.0));      // 3.333 (double)
         System.out.println(calc.divide(10.0, 3.0));  // 3.333... (double)
 
         // Задание 2

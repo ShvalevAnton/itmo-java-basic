@@ -41,14 +41,14 @@ public class Calculator {
     }
 
     // Деление
-    public int divide(int a, int b) {
+    public double divide(int a, int b) {
         if (b == 0) throw new ArithmeticException("Ошибка! Деление на ноль.");
-        return a / b;
+        return (double)a / b;
     }
 
-    public long divide(long a, long b) {
+    public double divide(long a, long b) {
         if (b == 0) throw new ArithmeticException("Ошибка! Деление на ноль.");
-        return a / b;
+        return (double)a / b;
     }
 
     public double divide(double a, double b) {
