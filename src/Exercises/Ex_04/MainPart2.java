@@ -5,59 +5,73 @@ import java.util.Random;
 
 public class MainPart2 {
     public static void main(String[] args) {
-        // Задание 1
-        //isSortedAscending();
         // Задание 2
-        //enterArr();
+        System.out.println("\nЗадание 2:");
+        int[] array = enterArr();
+        printArray(array);
+
+        // Задание 1
+        System.out.println("\nЗадание 1:");
+        printArray(array);
+        boolean res1 = isSortedAscending(array);
+        System.out.println(res1 ? "OK" : "Please, try again");
+
         // Задание 3
-        //swapFirstAndLast();
+        System.out.println("\nЗадание 3:");
+        printArray(array);
+        int[] Arr = swapFirstAndLast(array);
+        printArray(Arr);
+
         // Задание 4
-        //findFirstUnique();
-        // Задание 5
-        sortRndArr();
-    }
-
-    public static void isSortedAscending() {
-        Scanner scanner = new Scanner(System.in);
-
-        // Ввод массива
-        System.out.print("Введите количество элементов: ");
-        int length = scanner.nextInt();
-        int[] arr = new int[length];
-
-        System.out.println("Введите элементы массива:");
-        for (int i = 0; i < length; i++) {
-            System.out.print("Элемент " + (i + 1) + ": ");
-            arr[i] = scanner.nextInt();
+        System.out.println("\nЗадание 4:");
+        printArray(Arr);
+        int res4 = findFirstUnique(Arr);
+        // Вывод результата
+        if (res4 != -1) {
+            System.out.println("Первое уникальное число: " + res4);
+        } else {
+            System.out.println("Уникальных чисел нет");
         }
 
+        // Задание 5
+        System.out.println("\nЗадание 5:");
+        int[] sortArr = sortRndArr();
+        System.out.print("Отсортированный массив: ");
+        printArray(sortArr);
+    }
+
+    public static boolean isSortedAscending(int[] arr) {
         // Проверка сортировки
         boolean sorted = true;
-        for (int i = 0; i < length - 1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1]) {
                 sorted = false;
                 break;
             }
         }
-        System.out.println(sorted ? "OK" : "Please, try again");
+        return sorted;
     }
 
-    public static void enterArr() {
+    public static int[] enterArr() {
         Scanner scanner = new Scanner(System.in);
 
         // Ввод длины массива
-        System.out.println("Array length:");
+        System.out.println("Введите размер массива:");
         int length = scanner.nextInt();
 
         // Создание массива
         int[] array = new int[length];
 
         // Ввод элементов массива
-        System.out.println("Numbers of array:");
+        System.out.println("Введите элементы массива:");
         for (int i = 0; i < length; i++) {
+            System.out.print("Элемент " + (i + 1) + ": ");
             array[i] = scanner.nextInt();
         }
+        return array;
+    }
 
+    public static void printArray(int[] array) {
         // Вывод результата
         System.out.print("Result: [");
         for (int i = 0; i < array.length; i++) {
@@ -69,105 +83,52 @@ public class MainPart2 {
         System.out.println("]");
     }
 
-    public static void swapFirstAndLast() {
-
-
-        int[] array = {5, 6, 7, 2};
-
-        // Вывод исходного массива
-        System.out.print("Array 1: [");
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i]);
-            if (i < array.length - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println("]");
-
+    public static int[] swapFirstAndLast(int[] array) {
         // Создаем копию массива вручную
         int[] arrayCopy = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             arrayCopy[i] = array[i];
         }
-
         // Меняем местами первый и последний элементы в копии
         int temp = arrayCopy[0];
         arrayCopy[0] = arrayCopy[arrayCopy.length - 1];
         arrayCopy[arrayCopy.length - 1] = temp;
-
-        // Вывод измененного массива
-        System.out.print("Array 2: [");
-        for (int i = 0; i < arrayCopy.length; i++) {
-            System.out.print(arrayCopy[i]);
-            if (i < arrayCopy.length - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println("]");
+        return  arrayCopy;
     }
 
-    public static void findFirstUnique() {
-        Scanner scanner = new Scanner(System.in);
-
-        // Ввод массива
-        System.out.print("Введите количество элементов: ");
-        int length = scanner.nextInt();
-        int[] arr = new int[length];
-
-        System.out.println("Введите элементы массива:");
-        for (int i = 0; i < length; i++) {
-            System.out.print("Элемент " + (i + 1) + ": ");
-            arr[i] = scanner.nextInt();
+    public static int findFirstUnique(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
         }
 
-        // Поиск первого уникального числа
-        int firstUnique = -1; // -1 означает, что уникальное число не найдено
-
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             boolean isUnique = true;
-
-            // Проверяем, есть ли такое же число в массиве
-            for (int j = 0; j < length; j++) {
+            for (int j = 0; j < arr.length; j++) {
                 if (i != j && arr[i] == arr[j]) {
                     isUnique = false;
-                    break;
+                    break;  // Прерываем внутренний цикл, если нашли дубликат
                 }
             }
-
-            // Если число уникальное, запоминаем его и выходим из цикла
             if (isUnique) {
-                firstUnique = arr[i];
-                break;
+                return arr[i];  // Возвращаем первое уникальное число
             }
         }
-
-        // Вывод результата
-        if (firstUnique != -1) {
-            System.out.println("Первое уникальное число: " + firstUnique);
-        } else {
-            System.out.println("Уникальных чисел нет");
-        }
+        return -1;  // Если уникальных чисел нет
     }
 
-    public static void sortRndArr() {
+    public static int[] sortRndArr() {
         // Создаем массив из 10 случайных чисел (от 0 до 99)
         int[] array = new int[10];
         Random random = new Random();
-
         System.out.print("Исходный массив: ");
         for (int i = 0; i < array.length; i++) {
             array[i] = random.nextInt(100);
-            System.out.print(array[i] + " ");
         }
-        System.out.println();
+        printArray(array);
 
         // Сортировка слиянием
         mergeSort(array, 0, array.length - 1);
-
-        System.out.print("Отсортированный массив: ");
-        for (int num : array) {
-            System.out.print(num + " ");
-        }
+        return array;
     }
 
     // Реализация сортировки слиянием
@@ -229,6 +190,4 @@ public class MainPart2 {
             k++;
         }
     }
-
-
 }
