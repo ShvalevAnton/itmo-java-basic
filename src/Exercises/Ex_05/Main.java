@@ -25,7 +25,9 @@ public class Main {
         System.out.println("\nЗадание 3:");
         testText = "Жила-была в тёмном лесу вредная бяка — такая противная, что даже грибы от неё прятались! " +
                 "бяка любила пакостить: то лужу на тропинке оставит, то шишку на голову урони.";
-        testText = censorBaka(testText);
+        String reWord = "бяка";
+        String censorWord = "[вырезано цензурой]";
+        testText = censorBaka(testText, reWord, censorWord);
         System.out.println("\n" + testText);
 
         // Задание 4
@@ -77,11 +79,11 @@ public class Main {
         return cleaned.equals(reversed);
     }
 
-    public static String censorBaka(String text) {
+    public static String censorBaka(String text, String reWord, String censorWord) {
         if (text == null) {
             return null;
         }
-        return text.replace("бяка", "[вырезано цензурой]");
+        return text.replace(reWord, censorWord);
     }
 
     public static int countSubstringOccurrences(String text, String substring) {
