@@ -25,7 +25,7 @@ public class Main {
             mergeFiles("file1.txt", "file2.txt", "newFile.txt");
             printFileContents("newFile.txt");
 
-            System.out.printf("3.2 Конкатенации файлов\n");
+            System.out.printf("3.2 Конкатенация файлов\n");
             appendFileToAnother("file1.txt", "file2.txt");
             printFileContents("file1.txt");
 
@@ -34,7 +34,7 @@ public class Main {
             String text = "Код доступа: №XK-75;%%:: ввести пароль?? (****)\n";
             System.out.printf(text);
             writeStringToFile("source.txt", text);
-            replaceNonAlphanumericWithDollar("source.txt");
+            replaceNonAlphanumericWithDollar_1("source.txt");
             printFileContents("source.txt");
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,5 +125,17 @@ public class Main {
         }
         // Записываем изменённое содержимое обратно в файл
         Files.write(path, modifiedContent.toString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static void replaceNonAlphanumericWithDollar_1(String filePath) throws IOException {
+        // Читаем содержимое файла
+        Path path = Paths.get(filePath);
+        String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+
+        // Заменяем все символы, кроме букв и цифр, на '$' с помощью регулярного выражения
+        String modifiedContent = content.replaceAll("[^a-zA-Zа-яА-Я0-9]", "\\$");
+
+        // Записываем изменённое содержимое обратно в файл
+        Files.write(path, modifiedContent.getBytes(StandardCharsets.UTF_8));
     }
 }
